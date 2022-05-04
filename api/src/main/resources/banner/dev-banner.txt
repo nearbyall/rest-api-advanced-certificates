@@ -1,0 +1,9 @@
+  ____    U _____ u  __     __
+ |  _"\   \| ___"|/  \ \   /"/u
+/| | | |   |  _|"     \ \ / //
+U| |_| |\  | |___     /\ V /_,-.
+ |____/ u  |_____|   U  \_/-(_/
+  |||_     <<   >>     //
+ (__)_)   (__) (__)   (__)
+${application.title} ${application.version}
+Powered by Spring Boot ${spring-boot.version}
