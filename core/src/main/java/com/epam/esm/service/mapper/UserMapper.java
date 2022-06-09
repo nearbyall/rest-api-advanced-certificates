@@ -11,7 +11,8 @@ public class UserMapper {
     public UserEntity toUser(UserPostDTO userDTO) {
         return new UserEntity()
                 .setUsername(userDTO.getUsername())
-                .setPassword(userDTO.getPassword());
+                .setPassword(userDTO.getPassword())
+                .setRole(userDTO.getRole());
     }
 
     public UserDTO toDTO(UserEntity user) {

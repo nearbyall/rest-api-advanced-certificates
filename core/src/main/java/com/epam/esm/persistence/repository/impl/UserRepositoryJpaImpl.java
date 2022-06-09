@@ -45,6 +45,18 @@ public class UserRepositoryJpaImpl implements UserRepository {
     }
 
     @Override
+    public Optional<UserEntity> getByUsername(String username) {
+        List<UserEntity> users = entityManager
+                .createQuery("SELECT u FROM UserEntity u WHERE u.username = :username", UserEntity.class)
+                .setParameter("username", username)
+                .getResultList();
+
+        return users.isEmpty()
+                ? Optional.empty()
+                : Optional.of(users.get(0));
+    }
+
+    @Override
     public Integer update(UserEntity user) {
         throw new UnsupportedOperationException();
     }

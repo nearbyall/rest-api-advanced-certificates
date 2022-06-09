@@ -10,9 +10,6 @@ INSERT INTO certificates (name, description, price, duration, create_date, last_
 VALUES ('Beauty Store', 'Gift certificate for purchase in the beauty store', 60.0, 60,
         '2021-01-26T10:00:00.0', '2021-01-26T10:00:00.0');
 
-INSERT INTO users (username, password)
-VALUES ('admin', 'admin');
-
 INSERT INTO tags (name)
 VALUES ('game');
 INSERT INTO tags (name)

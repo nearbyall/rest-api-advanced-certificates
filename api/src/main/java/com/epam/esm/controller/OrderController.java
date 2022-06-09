@@ -44,7 +44,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
  * {@link  com.epam.esm.validation.Validator} for the validation of the DTO objects.
  */
 @RestController
-@RequestMapping(value = "/api/V1/users")
+@RequestMapping(value = "/api/V1/orders")
 public class OrderController {
 
     private final OrderService orderService;
@@ -76,7 +76,7 @@ public class OrderController {
      * and {@link com.epam.esm.service.dto.PageDTO}, containing all information about the current page
      * and overall count of pages
      */
-    @GetMapping("/{id}/orders")
+    @GetMapping("/{id}")
     public ResponseEntity<ObjectListDTO<OrderDTO>> getUserOrders(
             @PathVariable Integer id,
             @RequestParam(required = false, defaultValue = DEFAULT_PAGE_STR) int page,
@@ -103,7 +103,7 @@ public class OrderController {
      * @param orderId     order id
      * @return ResponseEntity of {@link OrderDTO} object with links
      */
-    @GetMapping("/{userId}/orders/{orderId}")
+    @GetMapping("/{userId}/{orderId}")
     public ResponseEntity<OrderDTO> getUserOrderByOrderId(@PathVariable Integer userId, @PathVariable Integer orderId) {
         Optional<OrderDTO> order = orderService.getByUserIdAndOrderId(userId, orderId);
 
@@ -128,7 +128,7 @@ public class OrderController {
      * @param bindingResult if the DTO has validation errors binding result will contain them
      * @return ResponseEntity of the created {@link OrderDTO} object with links
      */
-    @PostMapping("/{id}/orders")
+    @PostMapping("/{id}")
     public ResponseEntity<OrderDTO> makeOrderOnCertificate
     (@PathVariable Integer id, @Valid @RequestBody OrderPostDTO orderPostDTO, BindingResult bindingResult) {
         validator.checkErrorsInBindingResult(bindingResult, ApiStatusCode.ORDER_BAD_REQUEST);

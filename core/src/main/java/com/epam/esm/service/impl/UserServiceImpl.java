@@ -1,6 +1,7 @@
 package com.epam.esm.service.impl;
 
 import com.epam.esm.persistence.repository.UserRepository;
+import com.epam.esm.persistence.repository.entity.Role;
 import com.epam.esm.persistence.repository.entity.UserEntity;
 import com.epam.esm.service.UserService;
 import com.epam.esm.service.aspect.Loggable;
@@ -8,6 +9,7 @@ import com.epam.esm.service.dto.user.UserDTO;
 import com.epam.esm.service.dto.user.UserPostDTO;
 import com.epam.esm.service.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,11 +21,13 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     private final UserMapper mapper;
+    private final BCryptPasswordEncoder bCryptPasswordEncode;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, UserMapper mapper) {
+    public UserServiceImpl(UserRepository userRepository, UserMapper mapper, BCryptPasswordEncoder bCryptPasswordEncode) {
         this.userRepository = userRepository;
         this.mapper = mapper;
+        this.bCryptPasswordEncode = bCryptPasswordEncode;
     }
 
     @Override
@@ -39,7 +43,7 @@ public class UserServiceImpl implements UserService {
     public Optional<Integer> create(UserPostDTO userDTO) {
         UserEntity user = mapper.toUser(userDTO);
 
-        return userRepository.create(user);
+        return userRepository.create(user.setPassword(bCryptPasswordEncode.encode(user.getPassword())));
     }
 
     @Override

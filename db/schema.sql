@@ -32,7 +32,8 @@ CREATE TABLE users
 (
     id       serial,
     username character varying(50) NOT NULL,
-    password character varying(50) NOT NULL,
+    password character varying(100) NOT NULL,
+    role character varying(50),
     PRIMARY KEY (id),
     UNIQUE (username)
 );
