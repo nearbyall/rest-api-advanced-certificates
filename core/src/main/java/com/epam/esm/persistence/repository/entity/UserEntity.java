@@ -18,6 +18,10 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "role")
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
+
     @OneToMany(mappedBy = "user")
     private List<OrderEntity> orders;
 
@@ -57,6 +61,15 @@ public class UserEntity {
         return this;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public UserEntity setRole(Role role) {
+        this.role = role;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -67,6 +80,7 @@ public class UserEntity {
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (username != null ? !username.equals(that.username) : that.username != null) return false;
         if (password != null ? !password.equals(that.password) : that.password != null) return false;
+        if (role != that.role) return false;
         return orders != null ? orders.equals(that.orders) : that.orders == null;
     }
 
@@ -75,16 +89,19 @@ public class UserEntity {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
         result = 31 * result + (orders != null ? orders.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return  getClass().getSimpleName() + "{" +
+        return  getClass().getSimpleName() +
+                "{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", role=" + role +
                 '}';
     }
 

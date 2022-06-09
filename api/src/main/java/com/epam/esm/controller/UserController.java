@@ -4,6 +4,7 @@ package com.epam.esm.controller;
 import com.epam.esm.exception.BadRequestException;
 import com.epam.esm.exception.message.ApiStatusCode;
 import com.epam.esm.exception.message.MessageFactory;
+import com.epam.esm.persistence.repository.entity.Role;
 import com.epam.esm.service.UserService;
 import com.epam.esm.service.dto.user.UserDTO;
 import com.epam.esm.service.dto.user.UserPostDTO;
@@ -72,7 +73,7 @@ public class UserController {
      * @param bindingResult if the DTO has validation errors binding result will contain them
      * @return ResponseEntity of the {@link UserDTO} object with a username of a created user
      */
-    @PostMapping
+    @PostMapping(value = "/register")
     public ResponseEntity<UserDTO> register(@Valid @RequestBody UserPostDTO userDTO, BindingResult bindingResult) {
         validator.checkErrorsInBindingResult(bindingResult, ApiStatusCode.USER_BAD_REQUEST);
 
@@ -84,7 +85,7 @@ public class UserController {
             );
         }
 
-        Optional<Integer> id = userService.create(userDTO);
+        Optional<Integer> id = userService.create(userDTO.setRole(Role.USER));
 
         if (!id.isPresent()) {
             throw new BadRequestException(

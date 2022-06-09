@@ -1,6 +1,7 @@
 package com.epam.esm.generator;
 
 import com.epam.esm.exception.GenerationException;
+import com.epam.esm.persistence.repository.entity.Role;
 import com.epam.esm.service.CertificateService;
 import com.epam.esm.service.OrderService;
 import com.epam.esm.service.TagService;
@@ -32,6 +33,9 @@ public class ObjectGenerator {
     private final Random random;
 
     private static final String RANDOM_WORDS_URI = "https://random-word-api.herokuapp.com/word?number={number}";
+
+    private static final String ADMIN_USERNAME = "admin";
+    private static final String ADMIN_PASSWORD = "admin12345";
 
     @Autowired
     public ObjectGenerator(CertificateService certificateService,
@@ -76,12 +80,16 @@ public class ObjectGenerator {
 
     public List<Integer> generateUsers(int quantity, List<String> wordsForGenerations) {
         Map<String, String> userCredentials = generateUserCredentials(quantity, wordsForGenerations);
-
+        userService.create(new UserPostDTO()
+                .setUsername(ADMIN_USERNAME)
+                .setPassword(ADMIN_PASSWORD)
+                .setRole(Role.ADMIN));
         return userCredentials.entrySet()
                 .stream()
                 .map(user -> userService.create(new UserPostDTO()
                         .setUsername(user.getKey())
-                        .setPassword(user.getValue())))
+                        .setPassword(user.getValue())
+                        .setRole(Role.USER)))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());
