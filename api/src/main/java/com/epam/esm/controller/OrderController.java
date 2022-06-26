@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -130,10 +132,9 @@ public class OrderController {
      */
     @PostMapping("/{id}")
     public ResponseEntity<OrderDTO> makeOrderOnCertificate
-    (@PathVariable Integer id, @Valid @RequestBody OrderPostDTO orderPostDTO, BindingResult bindingResult) {
+    (@PathVariable Integer id, @Valid @RequestBody OrderPostDTO orderPostDTO, BindingResult bindingResult, Authentication authentication) {
         validator.checkErrorsInBindingResult(bindingResult, ApiStatusCode.ORDER_BAD_REQUEST);
         Integer certificateId = orderPostDTO.getCertificateId();
-
         Optional<OrderDTO> order = orderService.create(id, certificateId);
 
         if (!order.isPresent()) {

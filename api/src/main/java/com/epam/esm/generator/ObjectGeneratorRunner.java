@@ -28,10 +28,10 @@ public class ObjectGeneratorRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if (generationFlag) {
-            List<String> wordsForGenerations = generator.getGeneratedWords(5000);
-            List<TagDTO> generatedTags = generator.generateTags(1000);
-            List<Integer> gcIds = generator.generateCertificates(10000, generatedTags, wordsForGenerations);
-            List<Integer> userIds = generator.generateUsers(1000, wordsForGenerations);
+            List<String> wordsForGenerations = generator.getGeneratedWords(500);
+            List<TagDTO> generatedTags = generator.generateTags(100);
+            List<Integer> gcIds = generator.generateCertificates(100, generatedTags, wordsForGenerations);
+            List<Integer> userIds = generator.generateUsers(100, wordsForGenerations);
             int ordersCount = generator.generateOrders(gcIds, userIds);
 
             if (LOGGER.isDebugEnabled()) {
