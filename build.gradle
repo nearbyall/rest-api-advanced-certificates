@@ -5,6 +5,10 @@ plugins {
     id 'java'
 }
 
+bootJar {
+    enabled = false
+}
+
 subprojects {
 
     apply plugin: 'java'
