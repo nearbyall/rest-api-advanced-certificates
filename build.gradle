@@ -3,18 +3,29 @@ plugins {
     id 'org.springframework.boot' version '2.6.6'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id 'war'
 }
+
 repositories {
     mavenCentral()
     maven { url 'https://repo.spring.io/milestone' }
     maven { url 'https://repo.spring.io/snapshot' }
 }
+
+bootJar {
+    mainClass = 'com.epam.esm.ApiApplication'
+}
+
 subprojects {
 
-
     apply plugin: 'java'
+    apply plugin: 'war'
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'org.springframework.boot'
+
+    springBoot {
+        mainClass = "com.epam.esm.ApiApplication"
+    }
 
     repositories {
         mavenCentral()
