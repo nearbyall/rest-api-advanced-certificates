@@ -28,7 +28,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
-/*
+
 @ExtendWith(MockitoExtension.class)
 class TagServiceTest {
 
@@ -163,4 +163,3 @@ class TagServiceTest {
     }
 
 }
-*/
