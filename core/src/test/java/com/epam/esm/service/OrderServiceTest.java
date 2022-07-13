@@ -28,7 +28,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
-/*
+
 @ExtendWith(MockitoExtension.class)
 public class OrderServiceTest {
 
@@ -142,4 +142,3 @@ public class OrderServiceTest {
     }
 
 }
-*/

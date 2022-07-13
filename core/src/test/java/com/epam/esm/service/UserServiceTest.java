@@ -24,7 +24,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
-/*
+
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
 
@@ -63,26 +63,6 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testCreate_shouldDelegateCreationToRepositoryIfCreationIsSuccessful() {
-        int createdId = 11;
-        UserPostDTO userPostDTO = getUserPostDTO();
-        UserEntity user =  getUser();
-
-        when(userRepository.create(user)).thenReturn(Optional.of(createdId));
-
-        Optional<Integer> userId = userService.create(userPostDTO);
-
-        verify(userRepository).create(user);
-        verify(mapper).toUser(userPostDTO);
-
-        verifyNoMoreInteractions(userRepository);
-        verifyNoMoreInteractions(mapper);
-
-        assertTrue(userId.isPresent());
-        assertThat(userId.get(), is(equalTo(createdId)));
-    }
-
-    @Test
     public void testIsExistByUsername_shouldDelegateCheckingToRepositoryIfUserWasFound() {
         String username = "username";
 
@@ -97,4 +77,3 @@ public class UserServiceTest {
     }
 
 }
-*/
